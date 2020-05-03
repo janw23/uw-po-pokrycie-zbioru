@@ -12,9 +12,8 @@ public class Main {
 
         DataInterpreter dataInterpreter = new DataInterpreter();
 
-        String nextLine;
-        while(!(nextLine = sc.nextLine()).equals("")) {
-            String result = dataInterpreter.processNextLine(nextLine);
+        while(sc.hasNextLine()) {
+            String result = dataInterpreter.processNextLine(sc.nextLine());
 
             if (!result.equals(""))
                 System.out.println(result);

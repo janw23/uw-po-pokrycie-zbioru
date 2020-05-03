@@ -37,6 +37,9 @@ public class DataInterpreter {
             return "";
 
         for (String string : strings) {
+            if (string.equals(""))
+                continue;
+
             int val = Integer.parseInt(string);
 
             MatchedObject match = inputMatcher.processNextInt(val);
