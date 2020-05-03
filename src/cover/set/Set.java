@@ -1,6 +1,7 @@
 package cover.set;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Set {
 
@@ -12,6 +13,22 @@ public class Set {
 
     public void add(SetElement element) {
         elements.add(element);
+    }
+
+    //sprawdza, czy dowolny element zbioru, który również
+    //może być zbiorem, zawiera element [val]
+    public boolean anyElementContains(int val) {
+        for (SetElement elem : elements)
+            if (elem.contains(val)) return true;
+
+        return false;
+    }
+
+    public boolean anyElementContainsAnyOf(LinkedList<Integer> list) {
+        for (int val : list)
+            if (anyElementContains(val)) return true;
+
+        return false;
     }
 
     public String toString() {

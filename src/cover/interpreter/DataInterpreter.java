@@ -1,6 +1,13 @@
 package cover.interpreter;
 
+import cover.set.FiniteArithmeticProgression;
+import cover.set.InfiniteArithmeticProgression;
 import cover.set.Set;
+import cover.set.SetElement;
+import cover.solvers.ExactSolver;
+import cover.solvers.GreedySolver;
+import cover.solvers.NaiveSolver;
+import cover.solvers.Solver;
 
 import java.util.ArrayList;
 
@@ -11,7 +18,7 @@ public class DataInterpreter {
 
     //zbiór "R", z którego wybierane są następnie zbiory
     //do pokrycia zbioru z zapytania
-    private ArrayList<Set> coveringSourceSets;
+    private final ArrayList<Set> coveringSourceSets;
     private final InputMatcher inputMatcher;
 
     public DataInterpreter() {
@@ -26,7 +33,44 @@ public class DataInterpreter {
     }
 
     private String processQuery(Query query) {
-        return "";
+
+        FiniteArithmeticProgression Z =
+                new FiniteArithmeticProgression
+                        (1, 1, query.getFirst());
+
+        Solver solver;
+
+        switch (query.getSecond()) {
+            case 1:
+                solver = new ExactSolver();
+                break;
+            case 2:
+                solver = new GreedySolver();
+                break;
+            case 3:
+                solver = new NaiveSolver();
+                break;
+            default:
+                throw new IllegalStateException
+                        ("Unexpected value: " + query.getSecond());
+        }
+
+        if (query.getSecond() == 1 || query.getSecond() == 2)
+            return "";
+
+        ArrayList<Integer> solution =
+                solver.solveSetCoverage(Z, coveringSourceSets);
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < solution.size(); i++) {
+            stringBuilder.append(String.valueOf(solution.get(i) + 1));
+
+            if (i < solution.size() - 1)
+                stringBuilder.append(" ");
+        }
+
+        return stringBuilder.toString();
     }
 
     public String processNextLine(String line) {

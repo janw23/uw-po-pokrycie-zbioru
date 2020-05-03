@@ -9,6 +9,11 @@ public class SingularElement extends SetElement {
     }
 
     @Override
+    public boolean contains(int val) {
+        return value == val;
+    }
+
+    @Override
     public String toString() {
         return "{value: " + value + "}";
     }

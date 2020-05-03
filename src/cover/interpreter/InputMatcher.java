@@ -74,7 +74,7 @@ public class InputMatcher {
 
         switch (matching) {
             case MATCHING_TYPE_SET_FINITE:
-                matchedElement = new FiniteArithemticProgression
+                matchedElement = new FiniteArithmeticProgression
                         (CMV.get(0), -CMV.get(1), -CMV.get(2));
                 break;
 
