@@ -10,21 +10,6 @@ public class InputMatcher {
     private static final int INT_TYPE_D = 2; // > 0
     private static final int INT_TYPE_N = 3; // = 0
 
-    private static final int[] DEF_QUERY =
-            {INT_TYPE_U, INT_TYPE_D};
-
-    private static final int[] DEF_SET_FINITE =
-            {INT_TYPE_D, INT_TYPE_U, INT_TYPE_U};
-
-    private static final int[] DEF_SET_INFINITE =
-            {INT_TYPE_D, INT_TYPE_U};
-
-    private static final int[] DEF_SET_SINGULAR =
-            {INT_TYPE_D};
-
-    private static final int[] DEF_SET_ENDING =
-            {INT_TYPE_N};
-
     private static final int MATCHING_TYPE_NONE = -1;
     private static final int MATCHING_TYPE_QUERY = 1;
     private static final int MATCHING_TYPE_SET_SINGULAR = 2;
@@ -120,11 +105,11 @@ public class InputMatcher {
         if (matching == MATCHING_TYPE_QUERY) {
             int query_first = currentMatchingValues.get(0);
             clearCache();
-            return new MatchedQuery(-query_first, val);
+            return new MatchedObject<Query>(new Query(-query_first, val));
         }
         if (matching == MATCHING_TYPE_SET_EMPTY) {
             clearCache();
-            return new MatchedSet(currentMatchingSet);
+            return new MatchedObject<Set>(currentMatchingSet);
         }
         if (matching == MATCHING_TYPE_SET_FINITE
                 || matching == MATCHING_TYPE_SET_INFINITE
@@ -134,7 +119,7 @@ public class InputMatcher {
             clearCache();
 
             if (type == INT_TYPE_N)
-                return new MatchedSet(currentMatchingSet);
+                return new MatchedObject<Set>(currentMatchingSet);
         }
 
         currentMatchingAdd(val, type);

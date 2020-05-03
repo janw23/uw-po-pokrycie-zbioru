@@ -1,6 +1,7 @@
 package cover.interpreter;
 
 import cover.set.Set;
+
 import java.util.ArrayList;
 
 //definicja obiektu interpretującego dane
@@ -24,7 +25,7 @@ public class DataInterpreter {
         coveringSourceSets.clear();
     }
 
-    private String processQuery(MatchedQuery query) {
+    private String processQuery(Query query) {
         return "";
     }
 
@@ -42,19 +43,22 @@ public class DataInterpreter {
 
             if (match != null) {
                 inputMatcher.reset();
-                int matchType = match.getMatchedObjectType();
 
-                switch (matchType) {
-                    case MatchedObject.MATCHED_OBJECT_TYPE_QUERY:
-                        output.append(processQuery((MatchedQuery) match));
-                        System.err.println("Query"); //DEBUG
-                        break;
+                Object matchedObject = match.getMatchedObject();
 
-                    case MatchedObject.MATCHED_OBJECT_TYPE_SET:
-                        Set matchedSet = ((MatchedSet) match).getMatchedSet();
-                        coveringSourceSets.add(matchedSet);
-                        System.err.println(matchedSet.toString()); //DEBUG
-                        break;
+                if (matchedObject instanceof Query) {
+                    Query matchedQuery = (Query) matchedObject;
+                    output.append(processQuery(matchedQuery));
+
+                    //DEBUG
+                    System.err.println("Query(" + matchedQuery.getFirst()
+                            + "; " + matchedQuery.getSecond() + ")");
+
+                } else if (matchedObject instanceof Set) {
+                    Set matchedSet = (Set) matchedObject;
+                    coveringSourceSets.add(matchedSet);
+
+                    System.err.println(matchedSet.toString()); //DEBUG
                 }
             }
         }

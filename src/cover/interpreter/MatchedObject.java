@@ -1,13 +1,15 @@
 package cover.interpreter;
 
-public abstract class MatchedObject {
+public class MatchedObject<T> {
 
-    public static final int MATCHED_OBJECT_TYPE_QUERY = 1;
-    public static final int MATCHED_OBJECT_TYPE_SET = 2;
+    private final T matchedObject;
 
-    protected int matchedObjectType;
-
-    public int getMatchedObjectType() {
-        return matchedObjectType;
+    public MatchedObject(T matchedObject) {
+        this.matchedObject = matchedObject;
     }
+
+    public T getMatchedObject() {
+        return matchedObject;
+    }
+
 }
