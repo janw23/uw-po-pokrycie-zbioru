@@ -16,7 +16,7 @@ for filename in "${testsDir}"/*.in; do
 
   echo "Running test: $testName"
 
-  java -cp "$progDir" "$prog" <"$filename" >"$progOut"
+  java -ea -cp "$progDir" "$prog" <"$filename" >"$progOut"
 
   if [ "$(diff "$targetOut" "$progOut")" == "" ]; then
     testsPassed+=("$testName")

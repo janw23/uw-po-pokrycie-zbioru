@@ -14,7 +14,7 @@ public final class ExactSolver extends Solver {
     //(te, które odpowiadają wartościom true z [state])
     //faktycznie pokrywają zbiór Z
     private boolean checkCovering
-            (boolean[] state, ArrayList<Set> R, int ZMax) {
+    (boolean[] state, ArrayList<Set> R, int ZMax) {
 
         ArrayList<Set> subR = new ArrayList<>();
 

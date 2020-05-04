@@ -1,9 +1,7 @@
 package cover.interpreter;
 
 import cover.set.FiniteArithmeticProgression;
-import cover.set.InfiniteArithmeticProgression;
 import cover.set.Set;
-import cover.set.SetElement;
 import cover.solvers.ExactSolver;
 import cover.solvers.GreedySolver;
 import cover.solvers.NaiveSolver;

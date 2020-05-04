@@ -5,11 +5,9 @@ package cover.solvers;
 
 import cover.set.FiniteArithmeticProgression;
 import cover.set.Set;
-import cover.set.SetElement;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public final class GreedySolver extends Solver {
 
@@ -32,8 +30,8 @@ public final class GreedySolver extends Solver {
     //zwraca index zbioru w liście [RArrayList] zawierającego
     //najwięce elementów z listy [leftZElements]
     private int getTheSetContainingMost
-            (ArrayList<Pair<Set, Integer>> RArrayList,
-             LinkedList<Integer> leftZElements) {
+    (ArrayList<Pair<Set, Integer>> RArrayList,
+     LinkedList<Integer> leftZElements) {
 
         int indexOfMax = 0;
         int maxContainedCount = getCountOfElementsContained
@@ -66,7 +64,7 @@ public final class GreedySolver extends Solver {
         for (int i = 1; i <= Z.getLimit(); i++)
             leftZElements.add(i);
 
-        while (!RArrayList.isEmpty() && !leftZElements.isEmpty()){
+        while (!RArrayList.isEmpty() && !leftZElements.isEmpty()) {
             int index = getTheSetContainingMost(RArrayList, leftZElements);
             if (index == -1)
                 break;
