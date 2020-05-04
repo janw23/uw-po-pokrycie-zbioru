@@ -43,7 +43,7 @@ public final class ExactSolver extends Solver {
         BinaryStateIterator binIter = new BinaryStateIterator(R.size());
 
         //przechodzenie po liczbie wybranych zbiorów z rodziny R
-        for (int setsCount = 1; setsCount < R.size(); setsCount++) {
+        for (int setsCount = 1; setsCount <= R.size(); setsCount++) {
             binIter.init(setsCount);
 
             //sprawdzanie wszystkich podzbiorów mocy [setsCount]

@@ -13,6 +13,7 @@ public class BinaryStateIterator {
 
     public BinaryStateIterator(int bitsCount) {
         state = new boolean[bitsCount];
+        trueIndices = new int[0];
     }
 
     //przygotowuje iterator do generowania stanów
