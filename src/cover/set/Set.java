@@ -28,6 +28,8 @@ public class Set {
         return false;
     }
 
+    //sprawdza, czy dowolny element zbioru zawiera
+    //jakikolwiek element z [list]
     public boolean anyElementContainsAnyOf(LinkedList<Integer> list) {
         for (int val : list)
             if (anyElementContains(val)) return true;

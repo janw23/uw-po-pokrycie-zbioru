@@ -39,24 +39,15 @@ public class DataInterpreter {
                         (1, 1, query.getFirst());
 
         Solver solver;
+        int targetSolver = query.getSecond();
 
-        switch (query.getSecond()) {
-            case 1:
-                solver = new ExactSolver();
-                break;
-            case 2:
-                solver = new GreedySolver();
-                break;
-            case 3:
-                solver = new NaiveSolver();
-                break;
-            default:
-                throw new IllegalStateException
-                        ("Unexpected value: " + query.getSecond());
-        }
-
-        if (query.getSecond() == 1)
-            return "";
+        if (targetSolver == 1) {
+            solver = new ExactSolver();
+        } else if (targetSolver == 2) {
+            solver = new GreedySolver();
+        } else if (targetSolver == 3) {
+            solver = new NaiveSolver();
+        } else return "";
 
         ArrayList<Integer> solution =
                 solver.solveSetCoverage(Z, coveringSourceSets);
@@ -78,6 +69,8 @@ public class DataInterpreter {
         return stringBuilder.toString();
     }
 
+    //przetwarza następną linię tekstu z wejścia
+    //i zwraca odpowiedź na przetworzone dane
     public String processNextLine(String line) {
         StringBuilder output = new StringBuilder("");
         String[] strings = line.split("\\s+");
@@ -91,12 +84,12 @@ public class DataInterpreter {
 
             int val = Integer.parseInt(string);
 
-            MatchedObject match = inputMatcher.processNextInt(val);
+            //próbuje dopasować następną otrzymaną wartość
+            //do interpretacji, którą potencjalnie tworzy z poprzednimi
+            Object matchedObject = inputMatcher.processNextInt(val);
 
-            if (match != null) {
+            if (matchedObject != null) {
                 inputMatcher.reset();
-
-                Object matchedObject = match.getMatchedObject();
 
                 if (matchedObject instanceof Query) {
                     Query matchedQuery = (Query) matchedObject;

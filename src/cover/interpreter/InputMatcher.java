@@ -4,6 +4,9 @@ import cover.set.*;
 
 import java.util.ArrayList;
 
+//interpretuje otrzymane dane i próbuje
+//utworzyć z nich nowe obiekty, do których pasują
+
 public class InputMatcher {
 
     private static final int INT_TYPE_U = 1; // < 0
@@ -21,9 +24,15 @@ public class InputMatcher {
     private final ArrayList<Integer> currentMatchingValues;
     private Set currentMatchingSet;
 
-    //zamienić w przyszłości na drzewo
-    private int determineMatching(int nextIntType) {
+    public InputMatcher() {
+        currentMatchingTypes = new ArrayList<>();
+        currentMatchingValues = new ArrayList<>();
+        currentMatchingSet = new Set();
+    }
 
+    //zwraca typ obiektu, jakie tworzą poprzednie otrzymane
+    //wartości razem z następną [nextIntType]
+    private int determineMatching(int nextIntType) {
         int length = currentMatchingTypes.size();
 
         if (length == 0) {
@@ -45,12 +54,6 @@ public class InputMatcher {
         return MATCHING_TYPE_NONE;
     }
 
-    public InputMatcher() {
-        currentMatchingTypes = new ArrayList<>();
-        currentMatchingValues = new ArrayList<>();
-        currentMatchingSet = new Set();
-    }
-
     private void clearCache() {
         currentMatchingTypes.clear();
         currentMatchingValues.clear();
@@ -68,6 +71,7 @@ public class InputMatcher {
         currentMatchingValues.add(val);
     }
 
+    //tworzy element zbioru z otrzymanych i dopasowanych danych
     private SetElement createMatchedSetElement(int matching) {
         SetElement matchedElement;
         ArrayList<Integer> CMV = currentMatchingValues;
@@ -88,7 +92,8 @@ public class InputMatcher {
                 break;
 
             default:
-                throw new IllegalStateException("Unexpected value: " + matching);
+                throw new IllegalStateException
+                        ("Unexpected value: " + matching);
         }
 
         return matchedElement;
@@ -97,19 +102,18 @@ public class InputMatcher {
     //przetwarza następną wejściową wartość
     //jeśli powstało dopasowanie, to zwraca dopasowany obiekt
     //jeśli nie, to zwraca null
-    public MatchedObject processNextInt(int val) {
-
+    public Object processNextInt(int val) {
         int type = getIntType(val);
         int matching = determineMatching(type);
 
         if (matching == MATCHING_TYPE_QUERY) {
             int query_first = currentMatchingValues.get(0);
             clearCache();
-            return new MatchedObject<Query>(new Query(-query_first, val));
+            return new Query(-query_first, val);
         }
         if (matching == MATCHING_TYPE_SET_EMPTY) {
             clearCache();
-            return new MatchedObject<Set>(currentMatchingSet);
+            return currentMatchingSet;
         }
         if (matching == MATCHING_TYPE_SET_FINITE
                 || matching == MATCHING_TYPE_SET_INFINITE
@@ -119,7 +123,7 @@ public class InputMatcher {
             clearCache();
 
             if (type == INT_TYPE_N)
-                return new MatchedObject<Set>(currentMatchingSet);
+                return currentMatchingSet;
         }
 
         currentMatchingAdd(val, type);
