@@ -6,4 +6,6 @@ public abstract class SetElement {
 
     public abstract String toString();
 
+    public abstract boolean equals(SetElement element);
+
 }

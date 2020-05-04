@@ -12,6 +12,10 @@ public class Set {
     }
 
     public void add(SetElement element) {
+
+        for (SetElement elem : elements)
+            if (elem.equals(element)) return;
+
         elements.add(element);
     }
 

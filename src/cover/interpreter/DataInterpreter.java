@@ -55,11 +55,16 @@ public class DataInterpreter {
                         ("Unexpected value: " + query.getSecond());
         }
 
-        if (query.getSecond() == 1 || query.getSecond() == 2)
+        if (query.getSecond() == 1)
             return "";
 
         ArrayList<Integer> solution =
                 solver.solveSetCoverage(Z, coveringSourceSets);
+
+        if (solution == null)
+            return "0";
+
+        solution.sort(Integer::compareTo);
 
         StringBuilder stringBuilder = new StringBuilder();
 

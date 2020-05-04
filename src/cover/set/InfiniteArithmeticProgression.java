@@ -27,4 +27,16 @@ public class InfiniteArithmeticProgression extends SetElement {
         return "{start: " + start +
                 ", delta: " + delta + "}";
     }
+
+    @Override
+    public boolean equals(SetElement element) {
+        if (element instanceof InfiniteArithmeticProgression) {
+            InfiniteArithmeticProgression elem =
+                    (InfiniteArithmeticProgression) element;
+
+            return start == elem.start && delta == elem.delta;
+        }
+
+        return false;
+    }
 }

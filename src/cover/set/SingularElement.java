@@ -18,4 +18,12 @@ public class SingularElement extends SetElement {
         return "{value: " + value + "}";
     }
 
+    @Override
+    public boolean equals(SetElement element) {
+        if (element instanceof SingularElement)
+            return value == ((SingularElement) element).value;
+
+        return false;
+    }
+
 }

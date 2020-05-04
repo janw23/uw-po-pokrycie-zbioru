@@ -30,6 +30,6 @@ public final class NaiveSolver extends Solver {
             }
         }
 
-        return solution;
+        return leftZElements.isEmpty() ? solution : null;
     }
 }

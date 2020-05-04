@@ -28,6 +28,20 @@ public class FiniteArithmeticProgression extends SetElement {
     }
 
     @Override
+    public boolean equals(SetElement element) {
+        if (element instanceof FiniteArithmeticProgression) {
+            FiniteArithmeticProgression elem =
+                    (FiniteArithmeticProgression) element;
+
+            return start == elem.start &&
+                    delta == elem.delta &&
+                    limit == elem.limit;
+        }
+
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "{start: " + start +
                 ", delta: " + delta +
