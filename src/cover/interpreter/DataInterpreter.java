@@ -93,15 +93,9 @@ public class DataInterpreter {
                     Query matchedQuery = (Query) matchedObject;
                     output.append(processQuery(matchedQuery));
 
-                    //DEBUG
-                    //System.err.println("Query(" + matchedQuery.getFirst()
-                    //        + "; " + matchedQuery.getSecond() + ")");
-
                 } else if (matchedObject instanceof Set) {
                     Set matchedSet = (Set) matchedObject;
                     coveringSourceSets.add(matchedSet);
-
-                    //System.err.println(matchedSet.toString()); //DEBUG
                 }
             }
         }
